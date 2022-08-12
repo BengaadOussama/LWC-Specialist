@@ -7,7 +7,7 @@ const ERROR_TITLE = 'Error loading Boats Near Me';
 const ERROR_VARIANT = 'error';
 
 export default class BoatsNearMe extends LightningElement {
-    @api boatTypeId ='a017R00004ATs01QAD';
+    @api boatTypeId;
     @track mapMarkers = [];
     @track isLoading = true;
     @track isRendered = false;
