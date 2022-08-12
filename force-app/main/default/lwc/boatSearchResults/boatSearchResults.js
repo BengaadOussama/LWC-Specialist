@@ -48,6 +48,7 @@ export default class BoatSearchResults extends LightningElement {
       });
     }
     this.isLoading=false;
+    this.notifyLoading(this.isLoading);
   }
   
   // public function that updates the existing boatTypeId property
