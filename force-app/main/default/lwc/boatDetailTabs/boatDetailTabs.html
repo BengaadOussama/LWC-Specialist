@@ -1,0 +1,45 @@
+<!--
+  @description       : 
+  @author            : Oussama Bengaad  (obengaad@salesforce.com)
+  @group             : 
+  @last modified on  : 13-08-2022
+  @last modified by  : Oussama Bengaad  (obengaad@salesforce.com)
+-->
+<template>
+    <template if:false={boatId}>
+      <!-- lightning card for the label when wiredRecord has no data goes here  -->
+      <lightning-card  variant="Narrow">
+        <span class="no-boat-height slds-align_absolute-center">{label.labelPleaseSelectABoat}</span>
+      </lightning-card>
+    </template>
+    <template if:true={boatId}>
+      <!-- lightning card for the content when wiredRecord has data goes here  -->
+      <lightning-card  variant="Narrow">
+        <lightning-tabset variant="scoped">
+          <lightning-tab label={label.labelDetails} value={label.labelDetails}>
+            <lightning-card  variant="Narrow"  title={boatName} icon-name={detailsTabIconName}>
+              <lightning-button variant="base" label={label.labelFullDetails} title={label.labelFullDetails} onclick={navigateToRecordViewPage} slot="actions"></lightning-button>
+              <lightning-record-view-form
+                record-id={boatId}
+                density="compact"
+                object-api-name="Boat__c">
+                <div class="slds-box slds-theme_default">
+                  <lightning-output-field field-name="BoatType__c"></lightning-output-field>
+                  <lightning-output-field field-name="Length__c"></lightning-output-field>
+                  <lightning-output-field field-name="Price__c"></lightning-output-field>
+                  <lightning-output-field field-name="Description__c"></lightning-output-field>
+                </div>
+              </lightning-record-view-form>
+            </lightning-card>
+          </lightning-tab>
+          <lightning-tab label={label.labelReviews} value={label.labelReviews}>
+            <c-boat-reviews record-id={boatId}></c-boat-reviews>
+          </lightning-tab>
+          <lightning-tab label={label.labelAddReview} value={label.labelAddReview}>
+            <c-boat-add-review-form record-id={boatId} oncreatereview={handleReviewCreated}></c-boat-add-review-form>
+          </lightning-tab>
+        </lightning-tabset>
+      </lightning-card>
+    </template>
+  </template>
+  
